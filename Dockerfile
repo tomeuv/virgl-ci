@@ -13,5 +13,5 @@ RUN printf '%s\n' 9p 9pnet 9pnet_virtio | tee -a /etc/initramfs-tools/modules
 RUN update-initramfs -u
 
 RUN echo PermitRootLogin yes | tee -a /etc/ssh/sshd_config
-RUN echo PermitEmptyPasswords yes | tee -a /etc/ssh/sshd-config
+RUN echo PermitEmptyPasswords yes | tee -a /etc/ssh/sshd_config
 
