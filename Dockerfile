@@ -1,5 +1,7 @@
 FROM debian:testing-slim
 
+RUN useradd -ms /bin/bash -p virgl -G 114 virgl
+
 RUN echo deb-src http://deb.debian.org/debian testing main >> /etc/apt/sources.list
 RUN apt-get update
 
@@ -11,8 +13,6 @@ RUN /usr/sbin/update-ccache-symlinks
 RUN echo RESUME=none >> /etc/initramfs-tools/initramfs.conf
 RUN printf '%s\n' 9p 9pnet 9pnet_virtio | tee -a /etc/initramfs-tools/modules
 RUN update-initramfs -u
-
-RUN useradd -ms /bin/bash -p virgl -G kvm virgl
 
 USER virgl
 WORKDIR /home/virgl
