@@ -3,7 +3,7 @@ FROM debian:testing-slim
 RUN echo deb-src http://deb.debian.org/debian testing main >> /etc/apt/sources.list
 RUN apt-get update
 
-RUN apt-get -y install git check weston linux-image-amd64 libgbm-dev openssh-server meson libxvmc-dev
+RUN apt-get -y install git check weston linux-image-amd64 libgbm-dev openssh-server meson libxvmc-dev autoconf
 RUN apt-get -y build-dep qemu mesa virglrenderer
 
 RUN echo RESUME=none >> /etc/initramfs-tools/initramfs.conf
