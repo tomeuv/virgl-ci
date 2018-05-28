@@ -37,3 +37,5 @@ RUN /usr/sbin/update-ccache-symlinks
 RUN go get github.com/go-debos/fakemachine/cmd/fakemachine && \
     go install github.com/go-debos/fakemachine/cmd/fakemachine
 
+COPY weston.service /usr/lib/systemd/system/.
+
