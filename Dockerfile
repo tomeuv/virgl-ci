@@ -29,7 +29,8 @@ RUN apt -y install git \
                    strace
 RUN apt -y build-dep qemu \
                      mesa \
-                     virglrenderer
+                     virglrenderer \
+                     libepoxy
 
 RUN /usr/sbin/update-ccache-symlinks
 
