@@ -34,8 +34,8 @@ RUN apt -y build-dep qemu \
 
 RUN /usr/sbin/update-ccache-symlinks
 
-RUN go get github.com/go-debos/fakemachine/cmd/fakemachine && \
-    go install github.com/go-debos/fakemachine/cmd/fakemachine
+RUN go get github.com/tomeuv/fakemachine/cmd/fakemachine
+RUN go install github.com/tomeuv/fakemachine/cmd/fakemachine
 
 COPY weston.service /usr/lib/systemd/system/.
 
