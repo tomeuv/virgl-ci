@@ -26,7 +26,8 @@ RUN apt -y install git \
                    systemd \
                    dbus \
                    busybox \
-                   cmake
+                   cmake \
+                   spirv-headers
 RUN apt -y build-dep qemu \
                      mesa \
                      virglrenderer \
