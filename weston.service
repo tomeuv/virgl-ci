@@ -44,7 +44,7 @@ ExecStart=/usr/bin/weston --use-pixman --modules=systemd-notify.so
 #WatchdogSec=20
 
 # The user to run Weston as.
-#User=user
+User=root
 
 # Set up a full user session for the user, required by Weston.
 PAMName=login
