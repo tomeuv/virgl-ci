@@ -28,7 +28,8 @@ RUN apt -y install git \
                    busybox \
                    cmake \
                    spirv-headers \
-                   libsdl2-dev
+                   libsdl2-dev \
+                   strace
 RUN apt -y build-dep qemu \
                      mesa \
                      virglrenderer \
