@@ -36,8 +36,8 @@ ConditionPathExists=/dev/tty0
 [Service]
 
 # Requires systemd-notify.so Weston plugin.
-type=notify
-ExecStart=/usr/bin/weston --use-pixman
+Type=notify
+ExecStart=/usr/bin/weston --use-pixman --modules=systemd-notify.so
 
 # Optional watchdog setup
 #TimeoutStartSec=60
@@ -64,6 +64,6 @@ StandardError=journal
 UtmpIdentifier=tty7
 UtmpMode=user
 
-[install]
+[Install]
 WantedBy=graphical.target
 
