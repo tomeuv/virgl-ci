@@ -29,7 +29,8 @@ RUN apt -y install git \
                    cmake \
                    spirv-headers \
                    libsdl2-dev \
-                   strace
+                   strace \
+                   llvm-5.0-dev
 RUN apt -y build-dep qemu \
                      mesa \
                      virglrenderer \
