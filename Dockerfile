@@ -30,7 +30,7 @@ RUN apt -y install git \
                    spirv-headers \
                    libsdl2-dev \
                    strace \
-                   llvm-5.0-dev
+                   llvm
 RUN apt -y build-dep qemu \
                      mesa \
                      virglrenderer \
