@@ -49,8 +49,8 @@ RUN go install -x github.com/tomeuv/fakemachine/cmd/fakemachine
 
 # Drop this once http://hg.libsdl.org/SDL/rev/295cf9910d75 makes it into Debian
 RUN hg clone http://hg.libsdl.org/SDL
-RUN cd SDL && \
-    ./autogen.sh && \
+WORKDIR /SDL
+RUN ./autogen.sh && \
     ./configure  --prefix=/usr \
                  --includedir=\${prefix}/include \
                  --mandir=\${prefix}/share/man \
@@ -76,33 +76,8 @@ RUN cd SDL && \
                  --disable-wayland-shared \
                  --disable-video-vulkan && \
     make -j$(nproc) install && \
-    rm -rf $PWD
-
-RUN git clone https://github.com/anholt/libepoxy.git
-RUN cd libepoxy && \
-    git checkout $KNOWN_GOOD_EPOXY && \
-    git log --oneline -n 1 && \
-    ./autogen.sh && \
-    make -j$(nproc) install && \
-    rm -rf $PWD
-
-RUN git clone https://github.com/KhronosGroup/VK-GL-CTS.git
-RUN cd VK-GL-CTS && \
-    git checkout $KNOWN_GOOD_CTS && \
-    git log --oneline -n 1 && \
-    mkdir build && \
-    cd build && \
-    cmake .. -DDEQP_TARGET=wayland && \
-    make -j$(nproc) && \
-    mv $PWD /opt/.
-
-RUN git clone git://anongit.freedesktop.org/mesa/mesa
-RUN cd mesa && \
-    git checkout $KNOWN_GOOD_MESA && \
-    git log --oneline -n 1 && \
-    ./autogen.sh --with-platforms="drm x11 wayland" --with-dri-drivers= --with-gallium-drivers="swrast virgl" --enable-debug --enable-llvm ac_cv_path_LLVM_CONFIG=llvm-config-6.0 && \
-    make -j$(nproc) install && \
-    rm -rf $PWD
+    rm -rf /SDL
+WORKDIR /
 
 COPY weston.service /usr/lib/systemd/system/.
 
