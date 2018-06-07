@@ -78,7 +78,7 @@ RUN cd SDL && \
     make -j$(nproc) install && \
     rm -rf $PWD
 
-RUN git clone --depth 1 https://github.com/anholt/libepoxy.git
+RUN git clone https://github.com/anholt/libepoxy.git
 RUN cd libepoxy && \
     git checkout $KNOWN_GOOD_EPOXY && \
     git log --oneline -n 1 && \
@@ -86,7 +86,7 @@ RUN cd libepoxy && \
     make -j$(nproc) install && \
     rm -rf $PWD
 
-RUN git clone --depth 1 https://github.com/KhronosGroup/VK-GL-CTS.git
+RUN git clone https://github.com/KhronosGroup/VK-GL-CTS.git
 RUN cd VK-GL-CTS && \
     git checkout $KNOWN_GOOD_CTS && \
     git log --oneline -n 1 && \
