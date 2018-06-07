@@ -75,14 +75,16 @@ RUN cd SDL && \
                  --enable-video-wayland \
                  --disable-wayland-shared \
                  --disable-video-vulkan && \
-    make -j$(nproc) install
+    make -j$(nproc) install && \
+    rm -rf $PWD
 
 RUN git clone --depth 1 https://github.com/anholt/libepoxy.git
 RUN cd libepoxy && \
     git checkout $KNOWN_GOOD_EPOXY && \
     git log --oneline -n 1 && \
     ./autogen.sh && \
-    make -j$(nproc) install
+    make -j$(nproc) install && \
+    rm -rf $PWD
 
 RUN git clone --depth 1 https://github.com/KhronosGroup/VK-GL-CTS.git
 RUN cd VK-GL-CTS && \
@@ -91,17 +93,16 @@ RUN cd VK-GL-CTS && \
     mkdir build && \
     cd build && \
     cmake .. -DDEQP_TARGET=wayland && \
-    make -j$(nproc)
-RUN mv VK-GL-CTS /opt/.
+    make -j$(nproc) && \
+    mv $PWD /opt/.
 
 RUN git clone git://anongit.freedesktop.org/mesa/mesa
 RUN cd mesa && \
     git checkout $KNOWN_GOOD_MESA && \
     git log --oneline -n 1 && \
     ./autogen.sh --with-platforms="drm x11 wayland" --with-dri-drivers= --with-gallium-drivers="swrast virgl" --enable-debug --enable-llvm ac_cv_path_LLVM_CONFIG=llvm-config-6.0 && \
-    make -j$(nproc) install
-
-RUN rm -rf *
+    make -j$(nproc) install && \
+    rm -rf $PWD
 
 COPY weston.service /usr/lib/systemd/system/.
 
